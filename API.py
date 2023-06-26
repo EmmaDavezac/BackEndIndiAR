@@ -1,6 +1,8 @@
 from mysql.connector import Error
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 import mysql.connector
 try:
@@ -460,6 +462,7 @@ def get_juegos():
 
 @app.route('/api/juegos', methods=['POST'])
 def crear_juego():
+    
     nuevo_juego = request.json
     titulo = nuevo_juego.get('titulo')
     distribuidor = nuevo_juego.get('distribuidor')
