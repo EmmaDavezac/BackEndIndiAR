@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD de Requisitos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center my-5">CRUD de Requisitos</h1>
+
+        <!-- Formulario para crear un nuevo requisito -->
+        
+            <div class="mb-5" id="crear-div">
+            <h2>Crear requisito</h2>
+            <form id="crear-form">
+              <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="so_min" class="form-label">SO Mínimo:</label>
+                    <input type="text" id="so_min" name="so_min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="so_rec" class="form-label">SO recomendado:</label>
+                    <input type="text" id="so_rec" name="so_rec" class="form-control" required>
+                </div>
+              </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="procesador_min" class="form-label">Procesador Mínimo:</label>
+                    <input type="text" id="procesador_min" name="procesador_min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="procesador_rec" class="form-label">Procesador recomendado:</label>
+                    <input type="text" id="procesador_rec" name="procesador_rec" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="ram_min" class="form-label">RAM mínimo:</label>
+                    <input type="text" id="ram_min" name="ram__min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="ram_rec" class="form-label">RAM recomendado:</label>
+                    <input type="text" id="ram_rec" name="ram_rec" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="gpu_min" class="form-label">GPU mínimo:</label>
+                    <input type="text" id="gpu_min" name="gpu_min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="gpu_rec" class="form-label">GPU recomendado:</label>
+                    <input type="text" id="gpu_rec" name="gpu_rec" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="directx_min" class="form-label">Directx mínimo:</label>
+                    <input type="text" id="directx_min" name="directx_min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="directx_rec" class="form-label">Directx recomendado:</label>
+                    <input type="text" id="directx_rec" name="directx_rec" class="form-control" required>
+                </div>
+                </div>
+                <div>
+                    <button type="submit" id="btn-crear" class="btn btn-primary">Crear</button>
+                </div>
+                </form>
+        </div>
+
+            <!-- Formulario para editar un requisito  -->
+            <div class="mb-5" id="editar-div">
+                <h2>Editar requisito</h2>
+                <form id="editar-form">
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="id" class="form-label">ID:</label>
+                            <input type="text" id="id" name="id" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                       
+                        <div class="col-md-5 mb-3">
+                            <label for="so_min" class="form-label">SO Mínimo:</label>
+                            <input type="text" id="so_min2" name="so_min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="so_rec" class="form-label">SO recomendado:</label>
+                            <input type="text" id="so_rec2" name="so_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="procesador_min" class="form-label">Procesador Mínimo:</label>
+                            <input type="text" id="procesador_min2" name="procesador_min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="procesador_rec" class="form-label">Procesador recomendado:</label>
+                            <input type="text" id="procesador_rec2" name="procesador_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="ram_min" class="form-label">RAM mínimo:</label>
+                            <input type="text" id="ram_min2" name="ram__min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="ram_rec" class="form-label">RAM recomendado:</label>
+                            <input type="text" id="ram_rec2" name="ram_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="gpu_min" class="form-label">GPU mínimo:</label>
+                            <input type="text" id="gpu_min2" name="gpu_min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="gpu_rec" class="form-label">GPU recomendado:</label>
+                            <input type="text" id="gpu_rec2" name="gpu_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="directx_min" class="form-label">Directx mínimo:</label>
+                            <input type="text" id="directx_min2" name="directx_min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="directx_rec" class="form-label">Directx recomendado:</label>
+                            <input type="text" id="directx_rec2" name="directx_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" id="btn-editar" class="btn btn-primary">Editar</button>
+                    </div>
+                </form>
+            </div>
+        
+
+        <!-- Lista de requisitos -->
+        <div class="my-5" id="requisitos-div">
+            <h2>Lista de requisitos</h2>
+            <table class="table table-light mt-4 ">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Contraseña</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Script JavaScript para manejar las operaciones CRUD -->
+    <script>
+        // Función para cargar la lista de requisitos al cargar la página
+        window.onload = function () {
+            cargarrequisitos();
+        };
+
+
+        // Función para cargar la lista de requisitos desde la API
+
+        function cargarrequisitos() {
+            fetch("http://127.0.0.1:5000/api/requisitos")
+                .then(response => response.json())
+                .then(data => {
+                    tbody = document.getElementById("tbody");
+                    tbody.innerHTML = "";
+                    data.forEach (requisito => {
+                        let fila = document.createElement('tr');
+                        fila.innerHTML = '<td>' + requisito[0] + '</td> <td>' + requisito[1] + '</td> <td>' + requisito[2] + '</td> <td>' + requisito[3] + '</td>';
+                        const filaAcciones = document.createElement('td');
+                        fila.appendChild(filaAcciones);
+
+                        const editarBtn = document.createElement('button');
+                        editarBtn.innerText = 'Editar';
+                        editarBtn.classList.add("btn");
+                        editarBtn.classList.add("btn-primary");
+                        editarBtn.classList.add("me-2");
+                        editarBtn.addEventListener('click', () => {
+                        document.getElementById('id').value=requisito[0];
+                        document.getElementById('so_min2').value = requisito[1];
+                        document.getElementById('procesador_min2').value = requisito[2];
+                        document.getElementById('ram_min2').value = requisito[3];
+                        document.getElementById('gpu_min2').value = requisito[4];
+                        document.getElementById('directx_min2').value = requisito[5];
+                    });
+                        filaAcciones.appendChild(editarBtn);
+                        const eliminarBtn = document.createElement('button');
+                        eliminarBtn.innerText = 'Eliminar';
+                        eliminarBtn.classList.add("btn");
+                        eliminarBtn.classList.add("btn-danger");
+                        eliminarBtn.addEventListener('click', () => eliminarrequisito(requisito[0]));
+                        filaAcciones.appendChild(eliminarBtn);
+                        tbody = document.getElementById("tbody");
+                        tbody.appendChild(fila);
+                    });
+                });
+        }
+
+        // Función para crear un nuevo requisito
+        document.getElementById('crear-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            const psw = document.getElementById('password').value;
+            fetch("http://127.0.0.1:5000/api/requisitos", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "Nombre": nombre, "Email": correo, "Password": psw })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensaje);
+                    cargarrequisitos();
+                    document.getElementById('nombre').value = '';
+                    document.getElementById('correo').value = '';
+                    document.getElementById('password').value = '';
+                });
+        });
+        // Función para eliminar un requisito
+        function eliminarrequisito(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este requisito?')) {
+                fetch(`http://127.0.0.1:5000/api/requisitos/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.mensaje);
+                        cargarrequisitos();
+                    });
+            }
+        }
+        // Función para editar un requisito
+        document.getElementById('editar-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre2').value;
+            const correo = document.getElementById('correo2').value;
+            const psw = document.getElementById('password2').value;
+            const id = document.getElementById('id').value;
+            fetch('http://127.0.0.1:5000/api/requisitos/' + id, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "Nombre": nombre, "Email": correo, "Password": psw })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensaje);
+                    cargarrequisitos();
+                    document.getElementById('id').value = '';
+                    document.getElementById('nombre2').value = '';
+                    document.getElementById('correo2').value = '';
+                    document.getElementById('password2').value = '';
+
+                });
+        });
+
+    </script>
+</body>
+
+</html>

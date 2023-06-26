@@ -7,11 +7,11 @@ CORS(app)
 import mysql.connector
 try:
         connection = mysql.connector.connect(
-            host='sql10.freemysqlhosting.net',
-            database='sql10628307',
-            user='sql10628307',
-            password='RkafnrqbN2',
-            port='3306')
+            host='containers-us-west-31.railway.app',
+            database='railway',
+            user='root',
+            password='UsI7SSDLAbkxkVi3BbUr',
+            port='7792')
         print('conectado')   
 except Error as e:
         print(f'Error al conectarse a la base de datos {e}')
