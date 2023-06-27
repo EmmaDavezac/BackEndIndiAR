@@ -320,8 +320,11 @@ def actualizar_usuario(id):
 
 @app.route('/api/usuarios/<int:id>', methods=['DELETE'])
 def delete_usuario(id):
-    delete_usuario_en_db(id)
-    return jsonify({'mensaje': 'Usuario eliminado exitosamente'})
+    exito=delete_usuario_en_db(id)
+    if exito:
+        return jsonify({'mensaje': 'Usuario eliminado exitosamente'})
+    else:
+        return jsonify({'mensaje': 'Error al eliminar usuario'})
 
 #API-REST REQUISITO
 @app.route('/api/requisitos/<int:id>', methods=['GET'])
@@ -388,9 +391,11 @@ def actualizar_requisito(id):
 
 @app.route('/api/requisitos/<int:id>', methods=['DELETE'])
 def delete_requisito(id):
-    delete_requisito_en_db(id)
-    return jsonify({'mensaje': 'Requisito eliminado exitosamente'})
-
+    exito=delete_requisito_en_db(id)
+    if exito:
+        return jsonify({'mensaje': 'Requisito eliminado exitosamente'})
+    else:
+        return jsonify({'mensaje': 'Error al eliminar requisito'})
 # API-REST IMAGEN
 @app.route('/api/imagenes/<int:id>', methods=['GET'])
 def get_imagen(id):
@@ -503,7 +508,10 @@ def actualizar_juego(id):
 
 @app.route('/api/juegos/<int:id>', methods=['DELETE'])
 def delete_juego(id):
-    delete_juego_en_db(id)
-    return jsonify({'mensaje': 'Juego eliminado exitosamente'})
+    exito=delete_juego_en_db(id)
+    if exito:
+        return jsonify({'mensaje': 'Juego eliminado exitosamente'})
+    else:
+        return jsonify({'mensaje': 'Error al eliminar juego'})
 if __name__ == '__main__':
     app.run()
