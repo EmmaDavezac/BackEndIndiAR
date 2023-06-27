@@ -218,7 +218,14 @@
             event.preventDefault();
             const so_min = document.getElementById('so_min').value;
             const procesador_min = document.getElementById('procesador_min').value;
-            
+            const ram_min = document.getElementById('ram_min').value;
+            const GPU_min = document.getElementById('gpu_min').value;
+            const directx_min = document.getElementById('directx_min').value;
+            const so_rec = document.getElementById('so_rec').value;
+            const procesador_rec = document.getElementById('procesador_rec').value;
+            const ram_rec = document.getElementById('ram_rec').value;
+            const GPU_rec = document.getElementById('gpu_rec').value;
+            const directx_rec = document.getElementById('directx_rec').value;
 
 
             fetch("http://127.0.0.1:5000/api/requisitos", {
@@ -234,15 +241,21 @@
  "procesador_rec" : procesador_rec,
   "ram_rec" :ram_rec,
   "GPU_rec" :GPU_rec,
-  "directx_rec" :GPU_rec })
+  "directx_rec" :directx_rec })
             })
                 .then(response => response.json())
                 .then(data => {
                     alert(data.mensaje);
                     cargarrequisitos();
-                    document.getElementById('nombre').value = '';
-                    document.getElementById('correo').value = '';
-                    document.getElementById('password').value = '';
+                 document.getElementById('procesador_min').value='';
+                 document.getElementById('ram_min').value = '';
+                  document.getElementById('gpu_min').value = '';
+                   document.getElementById('directx_min').value = '';
+                   document.getElementById('so_rec').value = '';
+                    document.getElementById('procesador_rec').value = '';
+                   document.getElementById('ram_rec').value = '';
+                    document.getElementById('gpu_rec').value = '';
+                     document.getElementById('directx_rec').value = '';
                 });
         });
         // Función para eliminar un requisito
@@ -261,24 +274,48 @@
         // Función para editar un requisito
         document.getElementById('editar-form').addEventListener('submit', event => {
             event.preventDefault();
-            const nombre = document.getElementById('nombre2').value;
-            const correo = document.getElementById('correo2').value;
-            const psw = document.getElementById('password2').value;
+            const so_min = document.getElementById('so_min2').value;
+            const procesador_min = document.getElementById('procesador_min2').value;
+            const ram_min = document.getElementById('ram_min2').value;
+            const GPU_min = document.getElementById('gpu_min2').value;
+            const directx_min = document.getElementById('directx_min2').value;
+            const so_rec = document.getElementById('so_rec2').value;
+            const procesador_rec = document.getElementById('procesador_rec2').value;
+            const ram_rec = document.getElementById('ram_rec2').value;
+            const GPU_rec = document.getElementById('gpu_rec2').value;
+            const directx_rec = document.getElementById('directx_rec2').value;
             const id = document.getElementById('id').value;
             fetch('http://127.0.0.1:5000/api/requisitos/' + id, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ "Nombre": nombre, "Email": correo, "Password": psw })
+                body: JSON.stringify({
+                    "so_min": so_min,
+                    "procesador_min": procesador_min,
+                    "ram_min": ram_min,
+                    "GPU_min": GPU_min,
+                    "directx_min": directx_min,
+                    "so_rec": so_rec,
+                    "procesador_rec": procesador_rec,
+                    "ram_rec": ram_rec,
+                    "GPU_rec": GPU_rec,
+                    "directx_rec": directx_rec
+                })
             })
+        
                 .then(response => response.json())
                 .then(data => {
                     alert(data.mensaje);
                     cargarrequisitos();
-                    document.getElementById('id').value = '';
-                    document.getElementById('nombre2').value = '';
-                    document.getElementById('correo2').value = '';
-                    document.getElementById('password2').value = '';
-
+                    document.getElementById('id').value='';
+                    document.getElementById('procesador_min').value = '';
+                    document.getElementById('ram_min').value = '';
+                    document.getElementById('gpu_min').value = '';
+                    document.getElementById('directx_min').value = '';
+                    document.getElementById('so_rec').value = '';
+                    document.getElementById('procesador_rec').value = '';
+                    document.getElementById('ram_rec').value = '';
+                    document.getElementById('gpu_rec').value = '';
+                    document.getElementById('directx_rec').value = '';
                 });
         });
 
