@@ -1,33 +1,36 @@
+import mysql.connector
 from mysql.connector import Error
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-import mysql.connector
 try:
-        connection = mysql.connector.connect(
-            host='containers-us-west-31.railway.app',
-            database='railway',
-            user='root',
-            password='UsI7SSDLAbkxkVi3BbUr',
-            port='7792')
-        print('conectado')   
+    connection = mysql.connector.connect(
+        host='lucianodavezac.mysql.pythonanywhere-services.com',
+        database='lucianodavezac$IndiARDB',
+        user='lucianodavezac',
+        password='root1234',
+        port='3306')
+    print('conectado')
 except Error as e:
-        print(f'Error al conectarse a la base de datos {e}')
+    print(f'Error al conectarse a la base de datos {e}')
 
-#CRUD EN DB para usuarios
+# CRUD EN DB para usuarios
+
+
 def get_usuarios_en_db():
     try:
-            if connection.is_connected():
-                cursor = connection.cursor()
-                sql_query = "SELECT * FROM Usuarios"
-                cursor.execute(sql_query)
-                usuarios = cursor.fetchall()
-                cursor.close()
-                return usuarios
+        if connection.is_connected():
+            cursor = connection.cursor()
+            sql_query = "SELECT * FROM Usuarios"
+            cursor.execute(sql_query)
+            usuarios = cursor.fetchall()
+            cursor.close()
+            return usuarios
     except Error as e:
         print(f'Error al obtener lista de usuarios de la base de datos {e}')
+
 
 def get_usuario_en_db(id):
     try:
@@ -39,6 +42,7 @@ def get_usuario_en_db(id):
             return usuario
     except Error as e:
         print(f'Error al obtener usuario de la base de datos {e}')
+
 
 def crear_usuario_en_db(Nombre, Email, Password):
     try:
@@ -53,6 +57,7 @@ def crear_usuario_en_db(Nombre, Email, Password):
     except Error as e:
         print(f'Error al crear el usuario en la base de datos: {e}')
 
+
 def actualizar_usuario_en_db(ID, Nombre, Email, Password):
     try:
         if connection.is_connected():
@@ -65,6 +70,7 @@ def actualizar_usuario_en_db(ID, Nombre, Email, Password):
             return True
     except Error as e:
         print(f'Error al actualizar el usuario en la base de datos: {e}')
+
 
 def delete_usuario_en_db(id):
     try:
@@ -79,6 +85,8 @@ def delete_usuario_en_db(id):
         print(f'Error al eliminar usuario de la base de datos {e}')
 
 # CRUD EN DB para requisitos
+
+
 def get_requisitos_en_db():
     try:
         if connection.is_connected():
@@ -91,6 +99,7 @@ def get_requisitos_en_db():
     except Error as e:
         print(f'Error al obtener lista de requisitos de la base de datos {e}')
 
+
 def get_requisito_en_db(id):
     try:
         if connection.is_connected():
@@ -101,6 +110,7 @@ def get_requisito_en_db(id):
             return requisito
     except Error as e:
         print(f'Error al obtener el requisito de la base de datos {e}')
+
 
 def crear_requisito_en_db(so_min, procesador_min, ram_min, GPU_min, directx_min, so_rec, procesador_rec, ram_rec, GPU_rec, directx_rec):
     try:
@@ -116,6 +126,7 @@ def crear_requisito_en_db(so_min, procesador_min, ram_min, GPU_min, directx_min,
     except Error as e:
         print(f'Error al crear el requisito en la base de datos: {e}')
 
+
 def actualizar_requisito_en_db(ID, so_min, procesador_min, ram_min, GPU_min, directx_min, so_rec, procesador_rec, ram_rec, GPU_rec, directx_rec):
     try:
         if connection.is_connected():
@@ -130,6 +141,7 @@ def actualizar_requisito_en_db(ID, so_min, procesador_min, ram_min, GPU_min, dir
     except Error as e:
         print(f'Error al actualizar el requisito en la base de datos: {e}')
 
+
 def delete_requisito_en_db(id):
     try:
         if connection.is_connected():
@@ -143,6 +155,8 @@ def delete_requisito_en_db(id):
         print(f'Error al eliminar requisito de la base de datos {e}')
 
 # CRUD EN DB para imagenes
+
+
 def get_imagenes_en_db():
     try:
         if connection.is_connected():
@@ -155,6 +169,7 @@ def get_imagenes_en_db():
     except Error as e:
         print(f'Error al obtener lista de imagenes de la base de datos {e}')
 
+
 def get_imagen_en_db(id):
     try:
         if connection.is_connected():
@@ -166,18 +181,20 @@ def get_imagen_en_db(id):
     except Error as e:
         print(f'Error al obtener imagen de la base de datos {e}')
 
+
 def crear_imagen_en_db(url, ID_juego):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
             sql_query = "INSERT INTO Imagenes ( url, ID_juego) VALUES ( %s, %s)"
-            values = ( url, ID_juego)
+            values = (url, ID_juego)
             cursor.execute(sql_query, values)
             connection.commit()
             cursor.close()
             return True
     except Error as e:
         print(f'Error al crear la imagen en la base de datos: {e}')
+
 
 def actualizar_imagen_en_db(ID, url, ID_juego):
     try:
@@ -192,6 +209,7 @@ def actualizar_imagen_en_db(ID, url, ID_juego):
     except Error as e:
         print(f'Error al actualizar la imagen en la base de datos: {e}')
 
+
 def delete_imagen_en_db(id):
     try:
         if connection.is_connected():
@@ -205,6 +223,8 @@ def delete_imagen_en_db(id):
         print(f'Error al eliminar imagen de la base de datos {e}')
 
 # CRUD EN DB para requisitos
+
+
 def get_juegos_en_db():
     try:
         if connection.is_connected():
@@ -216,6 +236,7 @@ def get_juegos_en_db():
             return juegos
     except Error as e:
         print(f'Error al obtener lista de juegos de la base de datos {e}')
+
 
 def get_juego_en_db(id):
     try:
@@ -229,7 +250,7 @@ def get_juego_en_db(id):
         print(f'Error al obtener el juegos de la base de datos {e}')
 
 
-def crear_juego_en_db( titulo, distribuidor,desarrollador,lanzamiento,descripcion,ID_requisitos,precio):
+def crear_juego_en_db(titulo, distribuidor, desarrollador, lanzamiento, descripcion, ID_requisitos, precio):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
@@ -245,7 +266,7 @@ def crear_juego_en_db( titulo, distribuidor,desarrollador,lanzamiento,descripcio
 
 
 def actualizar_juego_en_db(ID, titulo, distribuidor, desarrollador,
-                               lanzamiento, descripcion, ID_requisitos, precio):
+                           lanzamiento, descripcion, ID_requisitos, precio):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
@@ -259,6 +280,7 @@ def actualizar_juego_en_db(ID, titulo, distribuidor, desarrollador,
     except Error as e:
         print(f'Error al actualizar el juego en la base de datos: {e}')
 
+
 def delete_juego_en_db(id):
     try:
         if connection.is_connected():
@@ -270,8 +292,10 @@ def delete_juego_en_db(id):
             return True
     except Error as e:
         print(f'Error al eliminar juego de la base de datos {e}')
-        
-#API-REST USUARIO
+
+# API-REST USUARIO
+
+
 @app.route('/api/usuarios/<int:id>', methods=['GET'])
 def get_usuario(id):
     usuario = get_usuario_en_db(id)
@@ -280,6 +304,7 @@ def get_usuario(id):
     else:
         return jsonify({'mensaje': 'No se encontro usuario'})
 
+
 @app.route('/api/usuarios', methods=['GET'])
 def get_usuarios():
     usuarios = get_usuarios_en_db()
@@ -287,6 +312,7 @@ def get_usuarios():
         return jsonify(usuarios)
     else:
         return jsonify({'mensaje': 'No se encontraron usuarios'})
+
 
 @app.route('/api/usuarios', methods=['POST'])
 def crear_usuario():
@@ -303,6 +329,7 @@ def crear_usuario():
     else:
         return jsonify({'mensaje': 'Datos de usuario incompletos'})
 
+
 @app.route('/api/usuarios/<int:id>', methods=['PUT'])
 def actualizar_usuario(id):
     nuevo_usuario = request.json
@@ -318,15 +345,18 @@ def actualizar_usuario(id):
     else:
         return jsonify({'mensaje': 'Datos de usuario incompletos'})
 
+
 @app.route('/api/usuarios/<int:id>', methods=['DELETE'])
 def delete_usuario(id):
-    exito=delete_usuario_en_db(id)
+    exito = delete_usuario_en_db(id)
     if exito:
         return jsonify({'mensaje': 'Usuario eliminado exitosamente'})
     else:
         return jsonify({'mensaje': 'Error al eliminar usuario'})
 
-#API-REST REQUISITO
+# API-REST REQUISITO
+
+
 @app.route('/api/requisitos/<int:id>', methods=['GET'])
 def get_requisito(id):
     requisito = get_requisito_en_db(id)
@@ -335,6 +365,7 @@ def get_requisito(id):
     else:
         return jsonify({'mensaje': 'No se encontro el requisito'})
 
+
 @app.route('/api/requisitos', methods=['GET'])
 def get_requisitos():
     requisitos = get_requisitos_en_db()
@@ -342,6 +373,7 @@ def get_requisitos():
         return jsonify(requisitos)
     else:
         return jsonify({'mensaje': 'No se encontraron requisitos'})
+
 
 @app.route('/api/requisitos', methods=['POST'])
 def crear_requisito():
@@ -366,6 +398,7 @@ def crear_requisito():
     else:
         return jsonify({'mensaje': 'Datos de requisito incompletos'})
 
+
 @app.route('/api/requisitos/<int:id>', methods=['PUT'])
 def actualizar_requisito(id):
     nuevo_requisito = request.json
@@ -381,7 +414,7 @@ def actualizar_requisito(id):
     directx_rec = nuevo_requisito.get('directx_rec')
     if so_min and procesador_min and ram_min and GPU_min and directx_min and so_rec and procesador_rec and ram_rec and GPU_rec and directx_rec:
         exito = actualizar_requisito_en_db(id, so_min, procesador_min, ram_min, GPU_min,
-                                      directx_min, so_rec, procesador_rec, ram_rec, GPU_rec, directx_rec)
+                                           directx_min, so_rec, procesador_rec, ram_rec, GPU_rec, directx_rec)
         if exito:
             return jsonify({'mensaje': 'Requisito actualizado exitosamente'})
         else:
@@ -389,14 +422,17 @@ def actualizar_requisito(id):
     else:
         return jsonify({'mensaje': 'Datos de requisito incompletos'})
 
+
 @app.route('/api/requisitos/<int:id>', methods=['DELETE'])
 def delete_requisito(id):
-    exito=delete_requisito_en_db(id)
+    exito = delete_requisito_en_db(id)
     if exito:
         return jsonify({'mensaje': 'Requisito eliminado exitosamente'})
     else:
         return jsonify({'mensaje': 'Error al eliminar requisito'})
 # API-REST IMAGEN
+
+
 @app.route('/api/imagenes/<int:id>', methods=['GET'])
 def get_imagen(id):
     imagen = get_imagen_en_db(id)
@@ -404,6 +440,7 @@ def get_imagen(id):
         return jsonify(imagen)
     else:
         return jsonify({'mensaje': 'No se encontro imagen'})
+
 
 @app.route('/api/imagenes', methods=['GET'])
 def get_imagenes():
@@ -413,9 +450,10 @@ def get_imagenes():
     else:
         return jsonify({'mensaje': 'No se encontraron imagenes'})
 
+
 @app.route('/api/imagenes', methods=['POST'])
 def crear_imagen():
-    nueva_imagen= request.json
+    nueva_imagen = request.json
     url = nueva_imagen.get('url')
     ID_juego = nueva_imagen.get('ID_juego')
     if url and ID_juego:
@@ -426,6 +464,7 @@ def crear_imagen():
             return jsonify({'mensaje': 'Error al crear la imagen en la base de datos'})
     else:
         return jsonify({'mensaje': 'Datos de la imagen incompletos'})
+
 
 @app.route('/api/imagenes/<int:id>', methods=['PUT'])
 def actualizar_imagen(id):
@@ -441,12 +480,15 @@ def actualizar_imagen(id):
     else:
         return jsonify({'mensaje': 'Datos de usuario incompletos'})
 
+
 @app.route('/api/imagenes/<int:id>', methods=['DELETE'])
 def delete_imagen(id):
     delete_imagen_en_db(id)
     return jsonify({'mensaje': 'Imagen eliminada exitosamente'})
 
 # API-REST REQUISITO
+
+
 @app.route('/api/juegos/<int:id>', methods=['GET'])
 def get_juego(id):
     juego = get_juego_en_db(id)
@@ -467,7 +509,7 @@ def get_juegos():
 
 @app.route('/api/juegos', methods=['POST'])
 def crear_juego():
-    
+
     nuevo_juego = request.json
     titulo = nuevo_juego.get('titulo')
     distribuidor = nuevo_juego.get('distribuidor')
@@ -476,8 +518,9 @@ def crear_juego():
     descripcion = nuevo_juego.get('descripcion')
     ID_requisitos = nuevo_juego.get('ID_requisitos')
     precio = nuevo_juego.get('precio')
-    if  titulo and distribuidor and desarrolador and lanzamiento and descripcion and ID_requisitos and precio:
-        exito = crear_juego_en_db(titulo,distribuidor,desarrolador,lanzamiento,descripcion,ID_requisitos,precio)
+    if titulo and distribuidor and desarrolador and lanzamiento and descripcion and ID_requisitos and precio:
+        exito = crear_juego_en_db(
+            titulo, distribuidor, desarrolador, lanzamiento, descripcion, ID_requisitos, precio)
         if exito:
             return jsonify({'mensaje': 'Juego creado exitosamente'})
         else:
@@ -497,7 +540,8 @@ def actualizar_juego(id):
     ID_requisitos = nuevo_juego.get('ID_requisitos')
     precio = nuevo_juego.get('precio')
     if titulo and distribuidor and desarrolador and lanzamiento and descripcion and ID_requisitos and precio:
-        exito = actualizar_juego_en_db( id, titulo, distribuidor, desarrolador, lanzamiento, descripcion, ID_requisitos, precio)
+        exito = actualizar_juego_en_db(
+            id, titulo, distribuidor, desarrolador, lanzamiento, descripcion, ID_requisitos, precio)
         if exito:
             return jsonify({'mensaje': 'Juego actualizado exitosamente'})
         else:
@@ -508,10 +552,12 @@ def actualizar_juego(id):
 
 @app.route('/api/juegos/<int:id>', methods=['DELETE'])
 def delete_juego(id):
-    exito=delete_juego_en_db(id)
+    exito = delete_juego_en_db(id)
     if exito:
         return jsonify({'mensaje': 'Juego eliminado exitosamente'})
     else:
         return jsonify({'mensaje': 'Error al eliminar juego'})
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=5000)

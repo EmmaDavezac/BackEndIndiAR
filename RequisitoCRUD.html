@@ -171,17 +171,16 @@
         // Función para cargar la lista de requisitos desde la API
 
         function cargarrequisitos() {
-            fetch("http://127.0.0.1:5000/api/requisitos")
+            fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos")
                 .then(response => response.json())
                 .then(data => {
                     tbody = document.getElementById("tbody");
                     tbody.innerHTML = "";
                     data.forEach (requisito => {
                         let fila = document.createElement('tr');
-                        fila.innerHTML = '<td>' + requisito[0] + '</td> <td>' + requisito[1] + '</td> <td>' + requisito[2] + '</td> <td>' + requisito[3] + '</td>';
+                        fila.innerHTML = '<td>' + requisito[0] + '</td> <td>' + requisito[1] + '</td> <td>' + requisito[2] + '</td> <td>' + requisito[3] + '</td>' + '</td> <td>' + requisito[4] + '</td> <td>' + requisito[5] + '</td>'+'<td>' + requisito[6] + '</td> <td>' + requisito[7] + '</td> <td>' + requisito[8] + '</td> <td>' + requisito[9] + '</td>' + '</td> <td>' + requisito[10] + '</td> <td>';
                         const filaAcciones = document.createElement('td');
                         fila.appendChild(filaAcciones);
-
                         const editarBtn = document.createElement('button');
                         editarBtn.innerText = 'Editar';
                         editarBtn.classList.add("btn");
@@ -228,7 +227,7 @@
             const directx_rec = document.getElementById('directx_rec').value;
 
 
-            fetch("http://127.0.0.1:5000/api/requisitos", {
+            fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -261,7 +260,7 @@
         // Función para eliminar un requisito
         function eliminarrequisito(id) {
             if (confirm('¿Estás seguro de que deseas eliminar este requisito?')) {
-                fetch(`http://127.0.0.1:5000/api/requisitos/${id}`, {
+                fetch(`https://lucianodavezac.pythonanywhere.com/api/requisitos/${id}`, {
                     method: 'DELETE'
                 })
                     .then(response => response.json())
@@ -285,7 +284,7 @@
             const GPU_rec = document.getElementById('gpu_rec2').value;
             const directx_rec = document.getElementById('directx_rec2').value;
             const id = document.getElementById('id').value;
-            fetch('http://127.0.0.1:5000/api/requisitos/' + id, {
+            fetch('https://lucianodavezac.pythonanywhere.com/api/requisitos/' + id, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

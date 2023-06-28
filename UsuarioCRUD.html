@@ -9,13 +9,13 @@
 
 <body>
     <div class="container">
-    <h1 class="text-center my-5">CRUD de Usuarios</h1>
+        <h1 class="text-center my-5">CRUD de Usuarios</h1>
 
-    <!-- Formulario para crear un nuevo usuario -->
-    <div class="row">
-        <div class="col-md-5 mx-auto" id="crear-div" ">
+        <!-- Formulario para crear un nuevo usuario -->
+        <div class="row">
+            <div class="col-md-5 mx-auto" id="crear-div" ">
             <h2>Crear Usuario</h2>
-            <form id="crear-form">
+            <form id=" crear-form">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" class="form-control" required>
@@ -29,56 +29,56 @@
                     <input type="text" id="password" name="password" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" id="btn-crear" class="btn btn-primary"  >Crear</button>
+                    <button type="submit" id="btn-crear" class="btn btn-primary">Crear</button>
                 </div>
-            </form>
-        </div>
-       
-        <!-- Formulario para editar un usuario  -->
-        <div class="col-md-5 mx-auto" id="editar-div" >
-            <h2>Editar Usuario</h2>
-            <form id="editar-form">
-                <div class="mb-3">
-                    <label for="id" class="form-label">ID:</label>
-                    <input type="text" id="id" name="id" class="form-control"  readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="nombre2" class="form-label">Nombre:</label>
-                    <input type="text" id="nombre2" name="nombre2" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label for="correo2" class="form-label">Correo:</label>
-                    <input type="email" id="correo2" name="correo2" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password2" class="form-label">password:</label>
-                    <input type="text" id="password2" name="password2" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <button type="submit" id="btn-editar" class="btn btn-primary" >Guardar</button>
-                </div>
-            </form>
-        </div>
-    </div>
+                </form>
+            </div>
 
-    <!-- Lista de usuarios -->
-   <div class="my-5" id="usuarios-div">
-    <h2>Lista de Usuarios</h2>
-    <table class="table table-light mt-4 ">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Contraseña</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tbody">
-        </tbody>
-    </table>
+            <!-- Formulario para editar un usuario  -->
+            <div class="col-md-5 mx-auto" id="editar-div">
+                <h2>Editar Usuario</h2>
+                <form id="editar-form">
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID:</label>
+                        <input type="text" id="id" name="id" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre2" class="form-label">Nombre:</label>
+                        <input type="text" id="nombre2" name="nombre2" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo2" class="form-label">Correo:</label>
+                        <input type="email" id="correo2" name="correo2" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password2" class="form-label">password:</label>
+                        <input type="text" id="password2" name="password2" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" id="btn-editar" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-</div>
+        <!-- Lista de usuarios -->
+        <div class="my-5" id="usuarios-div">
+            <h2>Lista de Usuarios</h2>
+            <table class="table table-light mt-4 ">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Contraseña</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+
+        </div>
     </div>
 
     <!-- Script JavaScript para manejar las operaciones CRUD -->
@@ -87,20 +87,20 @@
         window.onload = function () {
             cargarUsuarios();
         };
-        
+
 
         // Función para cargar la lista de usuarios desde la API
 
         function cargarUsuarios() {
-            fetch("http://127.0.0.1:5000/api/usuarios")
-                    .then(response => response.json())
-                    .then(data => {
+            fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios")
+                .then(response => response.json())
+                .then(data => {
                     tbody = document.getElementById("tbody");
-                    tbody.innerHTML  ="";
-                    data.forEach( usuario => {
+                    tbody.innerHTML = "";
+                    data.forEach(usuario => {
                         let fila = document.createElement('tr');
-                        fila.innerHTML = '<td>' +usuario[0] + '</td> <td>'+usuario[1]+'</td> <td>'+usuario[2]+'</td> <td>'+usuario[3]+'</td>';
-                        const filaAcciones=document.createElement('td');
+                        fila.innerHTML = '<td>' + usuario[0] + '</td> <td>' + usuario[1] + '</td> <td>' + usuario[2] + '</td> <td>' + usuario[3] + '</td>';
+                        const filaAcciones = document.createElement('td');
                         fila.appendChild(filaAcciones);
 
                         const editarBtn = document.createElement('button');
@@ -108,7 +108,7 @@
                         editarBtn.classList.add("btn");
                         editarBtn.classList.add("btn-primary");
                         editarBtn.classList.add("me-2");
-                        editarBtn.addEventListener('click', () => { document.getElementById('id').value=usuario[0]; document.getElementById('nombre2').value = usuario[1]; document.getElementById('correo2').value = usuario[2]; document.getElementById('password2').value = usuario[3]; });
+                        editarBtn.addEventListener('click', () => { document.getElementById('id').value = usuario[0]; document.getElementById('nombre2').value = usuario[1]; document.getElementById('correo2').value = usuario[2]; document.getElementById('password2').value = usuario[3]; });
                         filaAcciones.appendChild(editarBtn);
 
                         const eliminarBtn = document.createElement('button');
@@ -117,36 +117,35 @@
                         eliminarBtn.classList.add("btn-danger");
                         eliminarBtn.addEventListener('click', () => eliminarUsuario(usuario[0]));
                         filaAcciones.appendChild(eliminarBtn);
-                        tbody=document.getElementById("tbody");
+                        tbody = document.getElementById("tbody");
                         tbody.appendChild(fila);
                     });
                 });
         }
-    // Función para crear un nuevo usuario
-        document.getElementById('crear-form').addEventListener('submit',event =>
-    {
+        // Función para crear un nuevo usuario
+        document.getElementById('crear-form').addEventListener('submit', event => {
             event.preventDefault();
-        const nombre = document.getElementById('nombre').value;
-        const correo = document.getElementById('correo').value;
-        const psw = document.getElementById('password').value;
-        fetch("http://127.0.0.1:5000/api/usuarios", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "Nombre":nombre,"Email":correo, "Password": psw })
-        })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.mensaje);
-                cargarUsuarios();
-                document.getElementById('nombre').value = '';
-                document.getElementById('correo').value = '';
-                document.getElementById('password').value='';
-            });
-    });
-    // Función para eliminar un usuario
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            const psw = document.getElementById('password').value;
+            fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "Nombre": nombre, "Email": correo, "Password": psw })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensaje);
+                    cargarUsuarios();
+                    document.getElementById('nombre').value = '';
+                    document.getElementById('correo').value = '';
+                    document.getElementById('password').value = '';
+                });
+        });
+        // Función para eliminar un usuario
         function eliminarUsuario(id) {
             if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
-                fetch(`http://127.0.0.1:5000/api/usuarios/${id}`, {
+                fetch(`https://lucianodavezac.pythonanywhere.com/api/usuarios/${id}`, {
                     method: 'DELETE'
                 })
                     .then(response => response.json())
@@ -156,14 +155,14 @@
                     });
             }
         }
-    // Función para editar un usuario
-            document.getElementById('editar-form').addEventListener('submit', event => {
+        // Función para editar un usuario
+        document.getElementById('editar-form').addEventListener('submit', event => {
             event.preventDefault();
             const nombre = document.getElementById('nombre2').value;
             const correo = document.getElementById('correo2').value;
             const psw = document.getElementById('password2').value;
             const id = document.getElementById('id').value;
-            fetch('http://127.0.0.1:5000/api/usuarios/' + id, {
+            fetch('https://lucianodavezac.pythonanywhere.com/api/usuarios/' + id, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ "Nombre": nombre, "Email": correo, "Password": psw })
@@ -176,10 +175,10 @@
                     document.getElementById('nombre2').value = '';
                     document.getElementById('correo2').value = '';
                     document.getElementById('password2').value = '';
-                    
+
                 });
-        });   
-    
+        });
+
     </script>
 </body>
 
