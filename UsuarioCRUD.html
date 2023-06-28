@@ -107,7 +107,9 @@
                         editarBtn.innerText = 'Editar';
                         editarBtn.classList.add("btn");
                         editarBtn.classList.add("btn-primary");
-                        editarBtn.classList.add("me-2");
+                         editarBtn.classList.add("btn-primary");
+                        editarBtn.classList.add("col-md-12");
+                        editarBtn.classList.add("my-1");
                         editarBtn.addEventListener('click', () => { document.getElementById('id').value = usuario[0]; document.getElementById('nombre2').value = usuario[1]; document.getElementById('correo2').value = usuario[2]; document.getElementById('password2').value = usuario[3]; });
                         filaAcciones.appendChild(editarBtn);
 
@@ -115,6 +117,8 @@
                         eliminarBtn.innerText = 'Eliminar';
                         eliminarBtn.classList.add("btn");
                         eliminarBtn.classList.add("btn-danger");
+                        eliminarBtn.classList.add("col-md-12");
+                        eliminarBtn.classList.add("my-1");
                         eliminarBtn.addEventListener('click', () => eliminarUsuario(usuario[0]));
                         filaAcciones.appendChild(eliminarBtn);
                         tbody = document.getElementById("tbody");
