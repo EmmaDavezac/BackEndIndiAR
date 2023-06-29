@@ -250,13 +250,13 @@ def get_juego_en_db(id):
         print(f'Error al obtener el juegos de la base de datos {e}')
 
 
-def crear_juego_en_db(titulo, distribuidor, desarrollador, lanzamiento, descripcion, ID_requisitos, precio):
+def crear_juego_en_db(titulo, distribuidor, desarrollador, lanzamiento, descripcion, requisitosID, precio,img_principal):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
-            sql_query = "INSERT INTO Juegos ( titulo, distribuidor, desarrollador, lanzamiento, descripcion, ID_requisitos, precio) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            sql_query = "INSERT INTO Juegos ( titulo, distribuidor, desarrollador, lanzamiento, descripcion, requisitosID, precio, img_principal) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)"
             values = (titulo, distribuidor, desarrollador,
-                      lanzamiento, descripcion, ID_requisitos, precio)
+                      lanzamiento, descripcion, requisitosID, precio, img_principal)
             cursor.execute(sql_query, values)
             connection.commit()
             cursor.close()
@@ -265,14 +265,13 @@ def crear_juego_en_db(titulo, distribuidor, desarrollador, lanzamiento, descripc
         print(f'Error al crear el juego en la base de datos: {e}')
 
 
-def actualizar_juego_en_db(ID, titulo, distribuidor, desarrollador,
-                           lanzamiento, descripcion, ID_requisitos, precio):
+def actualizar_juego_en_db(id, titulo, distribuidor, desarrollador, lanzamiento, descripcion, requisitosID, precio, img_principal):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
-            sql_query = "UPDATE Juegos SET titulo = %s, distribuidor = %s, desarrollador = %s, lanzamiento = %s, descripcion = %s, ID_requisitos = %s, precio = %s WHERE ID = %s"
+            sql_query = "UPDATE Juegos SET titulo = %s, distribuidor = %s, desarrollador = %s, lanzamiento = %s, descripcion = %s, requisitosID = %s, precio = %s, img_principal = %s WHERE ID = %s"
             values = (titulo, distribuidor, desarrollador,
-                      lanzamiento, descripcion, ID_requisitos, precio, ID)
+                      lanzamiento, descripcion, requisitosID, precio,img_principal, id)
             cursor.execute(sql_query, values)
             connection.commit()
             cursor.close()
@@ -285,7 +284,7 @@ def delete_juego_en_db(id):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
-            sql_query = "DELETE FROM Juego WHERE ID = %s"
+            sql_query = "DELETE FROM Juegos WHERE ID = %s"
             cursor.execute(sql_query, (id,))
             connection.commit()
             cursor.close()
@@ -513,14 +512,16 @@ def crear_juego():
     nuevo_juego = request.json
     titulo = nuevo_juego.get('titulo')
     distribuidor = nuevo_juego.get('distribuidor')
-    desarrolador = nuevo_juego.get('desarrolador')
+    desarrollador = nuevo_juego.get('desarrollador')
     lanzamiento = nuevo_juego.get('lanzamiento')
     descripcion = nuevo_juego.get('descripcion')
-    ID_requisitos = nuevo_juego.get('ID_requisitos')
+    requisitosID = nuevo_juego.get('requisitosID')
+    img_principal = nuevo_juego.get('img_principal')
     precio = nuevo_juego.get('precio')
-    if titulo and distribuidor and desarrolador and lanzamiento and descripcion and ID_requisitos and precio:
+    if titulo and distribuidor and desarrollador and lanzamiento and descripcion and requisitosID and precio and img_principal:
         exito = crear_juego_en_db(
-            titulo, distribuidor, desarrolador, lanzamiento, descripcion, ID_requisitos, precio)
+            titulo, distribuidor, desarrollador
+    , lanzamiento, descripcion, requisitosID, precio,img_principal)
         if exito:
             return jsonify({'mensaje': 'Juego creado exitosamente'})
         else:
@@ -534,14 +535,16 @@ def actualizar_juego(id):
     nuevo_juego = request.json
     titulo = nuevo_juego.get('titulo')
     distribuidor = nuevo_juego.get('distribuidor')
-    desarrolador = nuevo_juego.get('desarrolador')
+    desarrollador = nuevo_juego.get('desarrollador')
     lanzamiento = nuevo_juego.get('lanzamiento')
     descripcion = nuevo_juego.get('descripcion')
-    ID_requisitos = nuevo_juego.get('ID_requisitos')
+    requisitosID = nuevo_juego.get('requisitosID')
+    img_principal = nuevo_juego.get('img_principal')
+
     precio = nuevo_juego.get('precio')
-    if titulo and distribuidor and desarrolador and lanzamiento and descripcion and ID_requisitos and precio:
+    if titulo and distribuidor and desarrollador and lanzamiento and descripcion and requisitosID and precio and img_principal:
         exito = actualizar_juego_en_db(
-            id, titulo, distribuidor, desarrolador, lanzamiento, descripcion, ID_requisitos, precio)
+            id, titulo, distribuidor, desarrollador, lanzamiento, descripcion, requisitosID, precio, img_principal)
         if exito:
             return jsonify({'mensaje': 'Juego actualizado exitosamente'})
         else:

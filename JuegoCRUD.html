@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Juegos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center my-5">CRUD de Juegos</h1>
+
+        <!-- Formulario para crear un nuevo juego -->
+
+        <div class="mb-5" id="crear-div">
+            <h2>Crear juego</h2>
+<form id="crear-form">
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label for="titulo" class="form-label">Titulo:</label>
+            <input type="text" id="titulo" name="titulo" class="form-control" required>
+        </div>
+        <div class="col-md-5">
+            <label for="precio" class="form-label">Precio:</label>
+            <input type="number" id="precio" name="precio" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label for="distribuidor" class="form-label">Distribuidor:</label>
+            <input type="text" id="distribuidor" name="distribuidor" class="form-control" required>
+        </div>
+       
+        <div class="col-md-5 mb-3">
+            <label for="desarrollador" class="form-label">Desarrollador</label>
+            <input type="text" id="desarrollador" name="ram__min" class="form-control" required>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label for="descripcion" class="form-label">Descripcion:</label>
+            <input type="text" id="descripcion" name="descripcion" class="form-control" required>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="lanzamiento" class="form-label">Lanzamiento:</label>
+            <input type="date" id="lanzamiento" name="lanzamiento" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label for="requisitosID" class="form-label">Requisitos ID:</label>
+            <input type="number" id="requisitosID" name="requisitosID" class="form-control" required>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="img_principal" class="form-label">Img Principal:</label>
+            <input type="url" id="img_principal" name="img_principal" class="form-control" required>
+        </div>
+
+    </div>
+    <div>
+        <button type="submit" id="btn-crear" class="btn btn-primary">Crear</button>
+
+    </div>
+    
+ 
+</form>
+        </div>
+
+        <!-- Formulario para editar un juego  -->
+        <div class="mb-5" id="editar-div">
+            <h2>Editar juego</h2>
+<form id="editar-form">
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label for="ID" class="form-label">ID:</label>
+            <input type="text" id="ID" name="ID" class="form-control" required readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label for="titulo2" class="form-label">Titulo:</label>
+            <input type="text" id="titulo2" name="titulo2" class="form-control" required>
+        </div>
+        <div class="col-md-5">
+            <label for="precio2" class="form-label">Precio:</label>
+            <input type="number" id="precio2" name="precio2" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label for="distribuidor2" class="form-label">Distribuidor:</label>
+            <input type="text" id="distribuidor2" name="distribuidor2" class="form-control" required>
+        </div>
+
+        <div class="col-md-5 mb-3">
+            <label for="desarrollador2" class="form-label">Desarrollador</label>
+            <input type="text" id="desarrollador2" name="desarrollador2" class="form-control" required>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label for="descripcion2" class="form-label">Descripcion:</label>
+            <input type="text" id="descripcion2" name="descripcion2" class="form-control" required>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="lanzamiento2" class="form-label">Lanzamiento:</label>
+            <input type="date" id="lanzamiento2" name="lanzamiento2" class="form-control" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 mb-3">
+            <label for="requisitosID2" class="form-label">Requisitos ID:</label>
+            <input type="number" id="requisitosID2" name="requisitosID2" class="form-control" required>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label for="img_principal2" class="form-label">Img Principal:</label>
+            <input type="url" id="img_principal2" name="img_principal2" class="form-control" required>
+        </div>
+
+    </div>
+    <div>
+        <button type="submit" id="btn-editar" class="btn btn-primary">Editar</button>
+
+    </div>
+
+
+</form>
+        </div>
+
+
+        <!-- Lista de juegos -->
+        <div class="my-5" id="juegos-div">
+            <h2>Lista de juegos</h2>
+            <table class="table table-light mt-4 ">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Titulo</th>
+                        <th>Distribuidor</th>
+                        <th>Desarrollador</th>
+                        <th>Lanzamiento</th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
+                        <th>Requisitos ID</th>
+                        <th>Img principal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Script JavaScript para manejar las operaciones CRUD -->
+    <script>
+        // Función para cargar la lista de juegos al cargar la página
+        window.onload = function () {
+            cargarjuegos();
+        };
+
+
+        // Función para cargar la lista de juegos desde la API
+
+        function cargarjuegos() {
+            fetch("https://lucianodavezac.pythonanywhere.com/api/juegos")
+                .then(response => response.json())
+                .then(data => {
+                    tbody = document.getElementById("tbody");
+                    tbody.innerHTML = "";
+                    data.forEach(juego => {
+                        let fila = document.createElement('tr');
+                        fila.innerHTML = '<td>' + juego[0] + '</td> <td>' + juego[1] + '</td> <td>' + juego[2] + '</td> <td>' + juego[3] + '</td>' + '</td> <td>' + juego[4] + '</td> <td>' + juego[5] + '</td>' + '<td>' + juego[6] + '</td> <td>' + juego[7] + '</td> <td>' + juego[8] + '</td> '  ;
+                        const filaAcciones = document.createElement('td');
+                        fila.appendChild(filaAcciones);
+                        const editarBtn = document.createElement('button');
+                        editarBtn.innerText = 'Editar';
+                        editarBtn.classList.add("btn");
+                        editarBtn.classList.add("btn-primary");
+                        editarBtn.classList.add("col-md-12");
+                        editarBtn.classList.add("my-1");
+
+
+                        editarBtn.addEventListener('click', () => {
+                            document.getElementById('ID').value = juego[0];
+                            document.getElementById('titulo2').value = juego[1];
+                            document.getElementById('distribuidor2').value = juego[2];
+                            document.getElementById('desarrollador2').value = juego[3];
+                            document.getElementById('lanzamiento2').value = juego[4];
+                            document.getElementById('descripcion2').value = juego[5];
+                            document.getElementById('precio2').value = juego[6];
+                            document.getElementById('requisitosID2').value = juego[7];
+                            document.getElementById('img_principal2').value = juego[8];
+                        });
+                        filaAcciones.appendChild(editarBtn);
+                        const eliminarBtn = document.createElement('button');
+                        eliminarBtn.innerText = 'Eliminar';
+                        eliminarBtn.classList.add("btn");
+                        eliminarBtn.classList.add("btn-danger");
+                        eliminarBtn.classList.add("col-md-12");
+                        eliminarBtn.classList.add("my-1");
+                        eliminarBtn.addEventListener('click', () => eliminarjuego(juego[0]));
+                        filaAcciones.appendChild(eliminarBtn);
+                        tbody = document.getElementById("tbody");
+                        tbody.appendChild(fila);
+                    });
+                });
+        }
+
+        // Función para crear un nuevo juego
+        document.getElementById('crear-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const titulo = document.getElementById('titulo').value;
+            const distribuidor = document.getElementById('distribuidor').value;
+            const desarrollador = document.getElementById('desarrollador').value;
+            const lanzamiento = document.getElementById('lanzamiento').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const precio = document.getElementById('precio').value;
+            const requisitosID = document.getElementById('requisitosID').value;
+            const img_principal = document.getElementById('img_principal').value;
+
+            fetch("https://lucianodavezac.pythonanywhere.com/api/juegos", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "titulo": titulo,
+                    "distribuidor": distribuidor,
+                    "desarrollador": desarrollador,
+                    "lanzamiento": lanzamiento,
+                    "descripcion": descripcion,
+                    "precio": precio,
+                    "requisitosID": requisitosID,
+                    "img_principal": img_principal
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensaje);
+                    cargarjuegos();
+                    document.getElementById('titulo').value = '';
+                    document.getElementById('distribuidor').value = '';
+                    document.getElementById('desarrollador').value = '';
+                    document.getElementById('lanzamiento').value = '';
+                    document.getElementById('descripcion').value = '';
+                    document.getElementById('precio').value = '';
+                    document.getElementById('requisitosID').value = '';
+                    document.getElementById('img_principal').value = '';
+                });
+        });
+        // Función para eliminar un juego
+        function eliminarjuego(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar estejuego?')) {
+                fetch(`https://lucianodavezac.pythonanywhere.com/api/juegos/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.mensaje);
+                        cargarjuegos();
+                    });
+            }
+        }
+        // Función para editar un juego
+        document.getElementById('editar-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const titulo = document.getElementById('titulo2').value;
+            const distribuidor = document.getElementById('distribuidor2').value;
+            const desarrollador = document.getElementById('desarrollador2').value;
+            const lanzamiento = document.getElementById('lanzamiento2').value;
+            const descripcion = document.getElementById('descripcion2').value;
+            const precio = document.getElementById('precio2').value;
+            const requisitosID = document.getElementById('requisitosID2').value;
+            const img_principal = document.getElementById('img_principal2').value;
+
+            const id = document.getElementById('ID').value;
+            fetch('https://lucianodavezac.pythonanywhere.com/api/juegos/' + id, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "titulo": titulo,
+                    "distribuidor": distribuidor,
+                    "desarrollador": desarrollador,
+                    "lanzamiento": lanzamiento,
+                    "descripcion": descripcion,
+                    "precio": precio,
+                    "requisitosID": requisitosID,
+                    "img_principal": img_principal
+                })
+            })
+
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensaje);
+                    cargarjuegos();
+                    document.getElementById('ID').value = '';
+                    document.getElementById('titulo2').value = '';
+                    document.getElementById('distribuidor2').value = '';
+                    document.getElementById('desarrollador2').value = '';
+                    document.getElementById('lanzamiento2').value = '';
+                    document.getElementById('descripcion2').value = '';
+                    document.getElementById('precio2').value = '';
+                    document.getElementById('requisitosID2').value = '';
+                    document.getElementById('img_principal2').value = '';
+                });
+        });
+
+    </script>
+</body>
+
+</html>

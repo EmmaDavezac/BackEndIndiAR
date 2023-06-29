@@ -42,7 +42,7 @@
                 <form id="editar-form">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID:</label>
-                        <input type="text" id="id" name="id" class="form-control" readonly>
+                        <input type="number" id="id" name="id" class="form-control" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="nombre2" class="form-label">Nombre:</label>
@@ -154,7 +154,7 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data.mensaje);
+                        alert(data.mensaje);
                         cargarUsuarios();
                     });
             }

@@ -61,11 +61,11 @@
             <div class="row">
                 <div class="col-md-5 mb-3">
                     <label for="directx_min" class="form-label">Directx mínimo:</label>
-                    <input type="text" id="directx_min" name="directx_min" class="form-control" required>
+                    <input type="nubmer" id="directx_min" name="directx_min" class="form-control" required>
                 </div>
                 <div class="col-md-5">
                     <label for="directx_rec" class="form-label">Directx recomendado:</label>
-                    <input type="text" id="directx_rec" name="directx_rec" class="form-control" required>
+                    <input type="number" id="directx_rec" name="directx_rec" class="form-control" required>
                 </div>
                 </div>
                 <div>
@@ -81,7 +81,7 @@
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label for="id" class="form-label">ID:</label>
-                            <input type="text" id="id" name="id" class="form-control" readonly>
+                            <input type="number" id="id" name="id" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="row">
@@ -128,11 +128,11 @@
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label for="directx_min" class="form-label">Directx mínimo:</label>
-                            <input type="text" id="directx_min2" name="directx_min" class="form-control" required>
+                            <input type="number" id="directx_min2" name="directx_min" class="form-control" required>
                         </div>
                         <div class="col-md-5">
                             <label for="directx_rec" class="form-label">Directx recomendado:</label>
-                            <input type="text" id="directx_rec2" name="directx_rec" class="form-control" required>
+                            <input type="number" id="directx_rec2" name="directx_rec" class="form-control" required>
                         </div>
                     </div>
                     <div>
@@ -279,7 +279,7 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
+                        alert(data,mensaje);
                         cargarrequisitos();
                     });
             }
