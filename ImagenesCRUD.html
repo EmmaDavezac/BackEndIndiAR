@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center my-5">CRUD de Imagenes</h1>
+
+        <!-- Formulario para crear una nueva imagen -->
+        <div class="row">
+            <div class="col-md-5 mx-auto" id="crear-div">
+            <h2>Crar Imagen</h2>
+            <form id="crear-form">
+                <div class="mb-3">
+                    <label for="url" class="form-label">URL:</label>
+                    <input type="url" id="url" name="url" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="juego" class="form-label">Juego:</label>
+                    <input type="number" id="juego" name="juego" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" id="btn-crear" class="btn btn-primary">Crear</button>
+                </div>
+                </form>
+            </div>
+
+            <!-- Formulario para editar una imagen  -->
+            <div class="col-md-5 mx-auto" id="editar-div">
+                <h2>Editar Imagen</h2>
+                <form id="editar-form">
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID:</label>
+                        <input type="number" id="id" name="id" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="url2" class="form-label">URL:</label>
+                        <input type="url" id="url2" name="url2" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="juego2" class="form-label">Juego:</label>
+                        <input type="number" id="juego2" name="juego2" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" id="btn-editar" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Lista de usuarios -->
+        <div class="my-5" id="usuarios-div">
+            <h2>Lista de Imagenes</h2>
+            <table class="table table-light mt-4 ">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>URL</th>
+                        <th>Juego</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Script JavaScript para manejar las operaciones CRUD -->
+    <script>
+        // Función para cargar la lista de imagenes al cargar la página
+        window.onload = function () {
+            cargarImagenes();
+        };
+
+
+        // Función para cargar la lista de usuarios desde la API
+
+        function cargarImagenes() {
+            fetch("https://lucianodavezac.pythonanywhere.com/api/imagenes")
+                .then(response => response.json())
+                .then(data => {
+                    tbody = document.getElementById("tbody");
+                    tbody.innerHTML = "";
+                    data.forEach(imagen => {
+                        let fila = document.createElement('tr');
+                        fila.innerHTML = '<td>' + imagen[0] + '</td> <td>' + imagen[1] + '</td> <td>' + imagen[2] + '</td> <td>';
+                        const filaAcciones = document.createElement('td');
+                        fila.appendChild(filaAcciones);
+
+                        const editarBtn = document.createElement('button');
+                        editarBtn.innerText = 'Editar';
+                        editarBtn.classList.add("btn");
+                        editarBtn.classList.add("btn-primary");
+                        editarBtn.classList.add("me-2");
+                        editarBtn.addEventListener('click', () => { document.getElementById('id').value = imagen[0]; document.getElementById('url2').value = usuario[1]; document.getElementById('juego2').value = imagen[2]; });
+                        filaAcciones.appendChild(editarBtn);
+
+                        const eliminarBtn = document.createElement('button');
+                        eliminarBtn.innerText = 'Eliminar';
+                        eliminarBtn.classList.add("btn");
+                        eliminarBtn.classList.add("btn-danger");
+                        eliminarBtn.addEventListener('click', () => eliminarImagen(imagen[0]));
+                        filaAcciones.appendChild(eliminarBtn);
+                        tbody = document.getElementById("tbody");
+                        tbody.appendChild(fila);
+                    });
+                });
+        }
+        // Función para crear una nueva imagen
+        document.getElementById('crear-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const juego = document.getElementById('juego').value;
+            fetch("https://lucianodavezac.pythonanywhere.com/api/imagenes", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "url": url,
+                 "juegoID": juego})
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensaje);
+                    cargarImagenes();
+                    document.getElementById('url').value = '';
+                    document.getElementById('juego').value = '';
+                });
+        });
+        // Función para eliminar una imagen
+        function eliminarImagen(id) {
+            if (confirm('¿Estás seguro de qué deseas eliminar esta imagen?')) {
+                fetch(`https://lucianodavezac.pythonanywhere.com/api/imagenes/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.mensaje);
+                        cargarImagenes();
+                    });
+            }
+        }
+        // Función para editar una imagen
+        document.getElementById('editar-form').addEventListener('submit', event => {
+            event.preventDefault();
+            const url= document.getElementById('url2').value;
+            const juego = document.getElementById('juego2').value;
+            const id = document.getElementById('id').value;
+            fetch('https://lucianodavezac.pythonanywhere.com/api/usuarios/' + id, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "url": url, "juegoID": juego })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensaje);
+                    cargarUsuarios();
+                    document.getElementById('id').value = '';
+                    document.getElementById('url2').value = '';
+                    document.getElementById('juego2').value = '';
+                });
+        });
+
+    </script>
+</body>
+
+</html>

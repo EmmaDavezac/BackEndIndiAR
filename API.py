@@ -186,7 +186,7 @@ def crear_imagen_en_db(url, ID_juego):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
-            sql_query = "INSERT INTO Imagenes ( url, ID_juego) VALUES ( %s, %s)"
+            sql_query = "INSERT INTO Imagenes (url, ID_juego) VALUES ( %s, %s)"
             values = (url, ID_juego)
             cursor.execute(sql_query, values)
             connection.commit()
@@ -454,7 +454,7 @@ def get_imagenes():
 def crear_imagen():
     nueva_imagen = request.json
     url = nueva_imagen.get('url')
-    ID_juego = nueva_imagen.get('ID_juego')
+    ID_juego = nueva_imagen.get('juegoID')
     if url and ID_juego:
         exito = crear_imagen_en_db(url, ID_juego)
         if exito:
