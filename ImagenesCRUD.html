@@ -123,7 +123,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ "url": url,
-                 "juegoID": juego})
+                 "juego_ID": juego})
             })
                 .then(response => response.json())
                 .then(data => {
@@ -155,7 +155,7 @@
             fetch('https://lucianodavezac.pythonanywhere.com/api/imagenes/' + id, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ "url": url, "juegoID": juego })
+                body: JSON.stringify({ "url": url, "juego_ID": juego })
             })
                 .then(response => response.json())
                 .then(data => {
