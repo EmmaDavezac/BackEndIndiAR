@@ -2,11 +2,10 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CRUD de Usuarios</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -15,23 +14,29 @@
 
         <!-- Formulario para crear un nuevo usuario -->
         <div class="row">
-            <div class="col-md-5 mx-auto" id="crear-div" ">
-            <h2>Crear Usuario</h2>
-            <form id="crear-form">
+            <div class="col-md-5 mx-auto" id="crear-div">
+        <h2>Crear Usuario</h2>
+        <form id="crear-form">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    <input type="text" id="nombre" name="nombre" class="form-control" required />
                 </div>
                 <div class="mb-3">
                     <label for="correo" class="form-label">Correo:</label>
-                    <input type="email" id="correo" name="correo" class="form-control" required>
+                    <input type="email" id="correo" name="correo" class="form-control" required />
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">password:</label>
-                    <input type="text" id="password" name="password" class="form-control" required>
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="text" id="password" name="password" class="form-control" required />
+                </div>
+                <div class="mb-3, form-check form-switch">
+                    <label for="admin" class="form-check-label">Administrador</label>
+                    <input type="checkbox" id="admin" name="admin" class="form-check-input" />
                 </div>
                 <div class="mb-3">
-                    <button type="submit" id="btn-crear" class="btn btn-primary">Crear</button>
+                    <button type="submit" id="btn-crear" class="btn btn-primary">
+                        Crear
+                    </button>
                 </div>
                 </form>
             </div>
@@ -42,22 +47,28 @@
                 <form id="editar-form">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID:</label>
-                        <input type="number" id="id" name="id" class="form-control" readonly>
+                        <input type="number" id="id" name="id" class="form-control" readonly />
                     </div>
                     <div class="mb-3">
                         <label for="nombre2" class="form-label">Nombre:</label>
-                        <input type="text" id="nombre2" name="nombre2" class="form-control" required>
+                        <input type="text" id="nombre2" name="nombre2" class="form-control" required />
                     </div>
                     <div class="mb-3">
                         <label for="correo2" class="form-label">Correo:</label>
-                        <input type="email" id="correo2" name="correo2" class="form-control" required>
+                        <input type="email" id="correo2" name="correo2" class="form-control" required />
                     </div>
                     <div class="mb-3">
-                        <label for="password2" class="form-label">password:</label>
-                        <input type="text" id="password2" name="password2" class="form-control" required>
+                        <label for="password2" class="form-label">Password:</label>
+                        <input type="text" id="password2" name="password2" class="form-control" required />
+                    </div>
+                    <div class="mb-3, form-check form-switch">
+                        <label for="admin2" class="form-check-label">Administrador</label>
+                        <input type="checkbox" id="admin2" name="admin2" class="form-check-input"/>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" id="btn-editar" class="btn btn-primary">Guardar</button>
+                        <button type="submit" id="btn-editar" class="btn btn-primary">
+                            Guardar
+                        </button>
                     </div>
                 </form>
             </div>
@@ -66,124 +77,163 @@
         <!-- Lista de usuarios -->
         <div class="my-5" id="usuarios-div">
             <h2>Lista de Usuarios</h2>
-            <table class="table table-light mt-4 ">
+            <table class="table table-light mt-4">
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Contraseña</th>
+                        <th>Administrador</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="tbody">
-                </tbody>
+                <tbody id="tbody"></tbody>
             </table>
-
         </div>
-    </div>
 
-    <!-- Script JavaScript para manejar las operaciones CRUD -->
-    <script>
-        // Función para cargar la lista de usuarios al cargar la página
-        window.onload = function () {
-            cargarUsuarios();
-        };
+        <!-- Script JavaScript para manejar las operaciones CRUD -->
+        <script>
+            // Función para cargar la lista de usuarios al cargar la página
+            window.onload = function () {
+                cargarUsuarios();
+            };
 
+            // Función para cargar la lista de usuarios desde la API
 
-        // Función para cargar la lista de usuarios desde la API
-
-        function cargarUsuarios() {
-            fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios")
-                .then(response => response.json())
-                .then(data => {
-                    tbody = document.getElementById("tbody");
-                    tbody.innerHTML = "";
-                    data.forEach(usuario => {
-                        let fila = document.createElement('tr');
-                        fila.innerHTML = '<td>' + usuario[0] + '</td> <td>' + usuario[1] + '</td> <td>' + usuario[2] + '</td> <td>' + usuario[3] + '</td>';
-                        const filaAcciones = document.createElement('td');
-                        fila.appendChild(filaAcciones);
-
-                        const editarBtn = document.createElement('button');
-                        editarBtn.innerText = 'Editar';
-                        editarBtn.classList.add("btn");
-                        editarBtn.classList.add("btn-primary");
-                        editarBtn.classList.add("me-2");
-                        editarBtn.addEventListener('click', () => { document.getElementById('id').value = usuario[0]; document.getElementById('nombre2').value = usuario[1]; document.getElementById('correo2').value = usuario[2]; document.getElementById('password2').value = usuario[3]; });
-                        filaAcciones.appendChild(editarBtn);
-
-                        const eliminarBtn = document.createElement('button');
-                        eliminarBtn.innerText = 'Eliminar';
-                        eliminarBtn.classList.add("btn");
-                        eliminarBtn.classList.add("btn-danger");
-                        eliminarBtn.addEventListener('click', () => eliminarUsuario(usuario[0]));
-                        filaAcciones.appendChild(eliminarBtn);
+            function cargarUsuarios() {
+                fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios")
+                    .then((response) => response.json())
+                    .then((data) => {
                         tbody = document.getElementById("tbody");
-                        tbody.appendChild(fila);
-                    });
-                });
-        }
-        // Función para crear un nuevo usuario
-        document.getElementById('crear-form').addEventListener('submit', event => {
-            event.preventDefault();
-            const nombre = document.getElementById('nombre').value;
-            const correo = document.getElementById('correo').value;
-            const psw = document.getElementById('password').value;
-            fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ "Nombre": nombre,
-                 "Email": correo,
-                "Password": psw })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.mensaje);
-                    cargarUsuarios();
-                    document.getElementById('nombre').value = '';
-                    document.getElementById('correo').value = '';
-                    document.getElementById('password').value = '';
-                });
-        });
-        // Función para eliminar un usuario
-        function eliminarUsuario(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
-                fetch(`https://lucianodavezac.pythonanywhere.com/api/usuarios/${id}`, {
-                    method: 'DELETE'
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert(data.mensaje);
-                        cargarUsuarios();
+                        tbody.innerHTML = "";
+                        data.forEach((usuario) => {
+                            let fila = document.createElement("tr");
+                            fila.innerHTML =
+                                "<td>" +
+                                usuario[0] +
+                                "</td> <td>" +
+                                usuario[1] +
+                                "</td> <td>" +
+                                usuario[2] +
+                                "</td> <td>" +
+                                usuario[3] +
+                                "</td> <td>" +
+                                usuario[4] +
+                                '</td>';
+                            const filaAcciones = document.createElement("td");
+                            fila.appendChild(filaAcciones);
+
+                            const editarBtn = document.createElement("button");
+                            editarBtn.innerText = "Editar";
+                            editarBtn.classList.add("btn");
+                            editarBtn.classList.add("btn-primary");
+                            editarBtn.classList.add("me-2");
+                            editarBtn.addEventListener("click", () => {
+                                document.getElementById("id").value = usuario[0];
+                                document.getElementById("nombre2").value = usuario[1];
+                                document.getElementById("correo2").value = usuario[2];
+                                document.getElementById("password2").value = usuario[3];
+                                document.getElementById("admin2").value = usuario[4];
+                            });
+                            filaAcciones.appendChild(editarBtn);
+
+                            const eliminarBtn = document.createElement("button");
+                            eliminarBtn.innerText = "Eliminar";
+                            eliminarBtn.classList.add("btn");
+                            eliminarBtn.classList.add("btn-danger");
+                            eliminarBtn.addEventListener("click", () =>
+                                eliminarUsuario(usuario[0])
+                            );
+                            filaAcciones.appendChild(eliminarBtn);
+                            tbody = document.getElementById("tbody");
+                            tbody.appendChild(fila);
+                        });
                     });
             }
-        }
-        // Función para editar un usuario
-        document.getElementById('editar-form').addEventListener('submit', event => {
-            event.preventDefault();
-            const nombre = document.getElementById('nombre2').value;
-            const correo = document.getElementById('correo2').value;
-            const psw = document.getElementById('password2').value;
-            const id = document.getElementById('id').value;
-            fetch('https://lucianodavezac.pythonanywhere.com/api/usuarios/' + id, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ "Nombre": nombre, "Email": correo, "Password": psw })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.mensaje);
-                    cargarUsuarios();
-                    document.getElementById('id').value = '';
-                    document.getElementById('nombre2').value = '';
-                    document.getElementById('correo2').value = '';
-                    document.getElementById('password2').value = '';
-
+            // Función para crear un nuevo usuario
+            document
+                .getElementById("crear-form")
+                .addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    const nombre = document.getElementById("nombre").value;
+                    const correo = document.getElementById("correo").value;
+                    const psw = document.getElementById("password").value;
+                    let admin="0";
+                    if (document.getElementById("admin").checked) {admin="1";};
+                    fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios",
+                     {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            "Nombre": nombre,
+                            "Email": correo,
+                            "Password": psw,
+                            "es_Admin": admin
+                        })
+                })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            alert(data.mensaje);
+                            cargarUsuarios();
+                            document.getElementById("nombre").value = "";
+                            document.getElementById("correo").value = "";
+                            document.getElementById("password").value = "";
+                            document.getElementById("admin").value = "";
+                        });
                 });
-        });
-
-    </script>
+            // Función para eliminar un usuario
+            function eliminarUsuario(id) {
+                if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+                    fetch(
+                        `https://lucianodavezac.pythonanywhere.com/api/usuarios/${id}`,
+                        {
+                            method: "DELETE",
+                        }
+                    )
+                        .then((response) => response.json())
+                        .then((data) => {
+                            alert(data.mensaje);
+                            cargarUsuarios();
+                        });
+                }
+            }
+            // Función para editar un usuario
+            document
+                .getElementById("editar-form")
+                .addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    const nombre = document.getElementById("nombre2").value;
+                    const correo = document.getElementById("correo2").value;
+                    const psw = document.getElementById("password2").value;
+                    const id = document.getElementById("id").value;
+                    let admin="0";
+                    if (document.getElementById("admin2").checked) {admin="1";};
+                    console.log(admin);
+                    fetch(
+                        "https://lucianodavezac.pythonanywhere.com/api/usuarios/" + id,
+                        {
+                            method: "PUT",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                "Nombre": nombre,
+                                "Email": correo,
+                                "Password": psw,
+                                "es_Admin": admin
+                            })
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            alert(data.mensaje);
+                            cargarUsuarios();
+                            document.getElementById("id").value = "";
+                            document.getElementById("nombre2").value = "";
+                            document.getElementById("correo2").value = "";
+                            document.getElementById("password2").value = "";
+                            document.getElementById("admin2").value = "";
+                        });
+                });
+        </script>
 </body>
 
 </html>

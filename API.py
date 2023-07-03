@@ -44,12 +44,12 @@ def get_usuario_en_db(id):
         print(f'Error al obtener usuario de la base de datos {e}')
 
 
-def crear_usuario_en_db(Nombre, Email, Password):
+def crear_usuario_en_db(Nombre, Email, Password, es_Admin):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
-            sql_query = "INSERT INTO Usuarios (nombre, Email, Password) VALUES (%s, %s, %s)"
-            values = (Nombre, Email, Password)
+            sql_query = "INSERT INTO Usuarios (Nombre, Email, Password, es_Admin) VALUES (%s, %s, %s, %s)"
+            values = (Nombre, Email, Password, es_Admin)
             cursor.execute(sql_query, values)
             connection.commit()
             cursor.close()
@@ -58,12 +58,12 @@ def crear_usuario_en_db(Nombre, Email, Password):
         print(f'Error al crear el usuario en la base de datos: {e}')
 
 
-def actualizar_usuario_en_db(ID, Nombre, Email, Password):
+def actualizar_usuario_en_db(ID, Nombre, Email, Password, es_Admin):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
-            sql_query = "UPDATE Usuarios SET Nombre = %s, Email=%s, Password= %s WHERE ID = %s"
-            values = (Nombre, Email, Password, ID)
+            sql_query = "UPDATE Usuarios SET Nombre = %s, Email=%s, Password= %s, es_Admin=%s WHERE ID = %s"
+            values = (Nombre, Email, Password, es_Admin, ID)
             cursor.execute(sql_query, values)
             connection.commit()
             cursor.close()
@@ -319,8 +319,9 @@ def crear_usuario():
     nombre = nuevo_usuario.get('Nombre')
     email = nuevo_usuario.get('Email')
     password = nuevo_usuario.get('Password')
-    if nombre and email and password:
-        exito = crear_usuario_en_db(nombre, email, password)
+    es_Admin=nuevo_usuario.get('es_Admin')
+    if nombre and email and password and es_Admin:
+        exito = crear_usuario_en_db(nombre, email, password,es_Admin)
         if exito:
             return jsonify({'mensaje': 'Usuario creado exitosamente'})
         else:
@@ -335,8 +336,9 @@ def actualizar_usuario(id):
     nombre = nuevo_usuario.get('Nombre')
     email = nuevo_usuario.get('Email')
     password = nuevo_usuario.get('Password')
+    es_Admin = nuevo_usuario.get('es_Admin')
     if nombre and email and password:
-        exito = actualizar_usuario_en_db(id, nombre, email, password)
+        exito = actualizar_usuario_en_db(id, nombre, email, password, es_Admin)
         if exito:
             return jsonify({'mensaje': 'Usuario actualizado exitosamente'})
         else:
