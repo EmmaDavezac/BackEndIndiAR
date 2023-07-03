@@ -209,9 +209,8 @@
                     const id = document.getElementById("id").value;
                     let admin="0";
                     if (document.getElementById("admin2").checked) {admin="1";};
-                    console.log(admin);
                     fetch(
-                        "https://lucianodavezac.pythonanywhere.com/api/usuarios/" + id,
+                        'https://lucianodavezac.pythonanywhere.com/api/usuarios/' + id,
                         {
                             method: "PUT",
                             headers: { "Content-Type": "application/json" },
